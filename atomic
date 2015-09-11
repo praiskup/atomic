@@ -44,6 +44,15 @@ except IOError:
     builtins.__dict__['_'] = str
 
 
+def add_generic_subparsers(parser, command):
+    parser.add_argument("--env", "-e", dest="env", type=str, action='append',
+                        metavar="ENV[=VALUE]",
+                        help=_("set additional environment variable ENV "
+                               "for '{0}' command; value of $ENV from actual "
+                               "environment is inherited when no VALUE "
+                               "is specified".format(command)))
+
+
 class HelpByDefaultArgumentParser(argparse.ArgumentParser):
 
     def error(self, message):
@@ -149,6 +158,9 @@ if __name__ == '__main__':
         "INSTALL command to your Dockerfile like: 'LABEL INSTALL "
         "%s'" % atomic.print_install())
     installp.set_defaults(func=atomic.install)
+
+    add_generic_subparsers(installp, 'install')
+
     installp.add_argument("--opt1", dest="opt1",
                           help="additional arguments to be passed as ${OPT1} "
                                "for install command.")
@@ -280,6 +292,9 @@ if __name__ == '__main__':
         epilog="atomic run defaults to the following command, if image "
         "does not specify LABEL run\n'%s'" % atomic.print_run())
     runp.set_defaults(func=atomic.run)
+
+    add_generic_subparsers(runp, 'run')
+
     runp.add_argument("--opt1", dest="opt1",
                       help="additional arguments to be passed as ${OPT1} for "
                       "run command.")
@@ -315,6 +330,9 @@ if __name__ == '__main__':
         "LABEL UNINSTALL command to your Dockerfile like: 'LABEL "
         "UNINSTALL %s'" % atomic.print_uninstall())
     uninstallp.set_defaults(func=atomic.uninstall)
+
+    add_generic_subparsers(uninstallp, 'uninstall')
+
     uninstallp.add_argument("--opt1", dest="opt1",
                             help="additional arguments to be passed as "
                                  "${OPT1} for uninstall command.")

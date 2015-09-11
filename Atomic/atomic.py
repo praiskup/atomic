@@ -511,6 +511,16 @@ class Atomic(object):
                'LOGDIR': "/var/log/%s" % self.name,
                'DATADIR': "/var/lib/%s" % self.name}
 
+        if hasattr(self.args, 'env') and self.args.env:
+            for i in self.args.env:
+                pair = i.split('=', 1)
+                name = pair[0]
+                env[name] = ""
+                if len(pair) > 1:
+                    env[name] = pair[1]
+                elif name in os.environ:
+                    env[name] = os.environ[name]
+
         if hasattr(self.args, 'opt1') and self.args.opt1:
             env['OPT1'] = self.args.opt1
 

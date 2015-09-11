@@ -12,6 +12,7 @@ atomic-run - Execute container image run method
 [**--opt1**[=*OPT*]]
 [**--opt2**[=*OPT*]]
 [**--opt3**[=*OPT*]]
+[**-e**][**--env**[=*VAR[=NAME]*]]
 [**--spc**]
 IMAGE [COMMAND] [ARG...]
 
@@ -75,6 +76,10 @@ in the LABEL.
 **--opt3**=""
    Substitute options specified as opt3 for all instances of ${OPT3} specified
 in the LABEL.
+
+**-e** **--env**=""
+   Set additional environment variable ENV for 'run' command; value of $ENV
+from actual environment is inherited when no VALUE is specified.
 
 **--spc**
   Run container in super privileged container mode.  The image will run with the following command:

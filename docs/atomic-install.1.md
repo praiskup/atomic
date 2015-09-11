@@ -12,6 +12,7 @@ atomic-install - Execute Image Install Method
 [**--opt1**[=*OPT*]]
 [**--opt2**[=*OPT*]]
 [**--opt3**[=*OPT*]]
+[**-e**][**--env**[=*VAR[=NAME]*]]
 IMAGE [ARG...]
 
 # DESCRIPTION
@@ -65,6 +66,10 @@ in the LABEL.
 **--opt3**=""
    Substitute options specified as opt3 for all instances of ${OPT3} specified
 in the LABEL.
+
+**-e** **--env**=""
+   Set additional environment variable ENV for 'install' command; value of $ENV
+from actual environment is inherited when no VALUE is specified.
 
 # HISTORY
 January 2015, Originally compiled by Daniel Walsh (dwalsh at redhat dot com)
